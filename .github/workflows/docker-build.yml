@@ -14,7 +14,7 @@ jobs:
       run: |
         docker run \
         -v ${{ github.workspace }}:/root/workspace \
-        techdevangelist/miyoomini-buildroot:latest /bin/bash -c "cd /root/workspace && ./libretro-buildbot-recipe.sh cores-linux-arm7neonhf"
+        techdevangelist/miyoomini-buildroot:latest /bin/bash -c "cd /root/workspace/libretro-super && ./libretro-buildbot-recipe.sh ../cores-onionos"
 
     - name: Upload the build artifact
       uses: actions/upload-artifact@v3.0.0
