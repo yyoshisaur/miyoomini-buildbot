@@ -20,6 +20,6 @@ jobs:
       uses: actions/upload-artifact@v3.0.0
       with:
         name: OnionOS cores for arm7neonhf
-        path: dist/unix/*
+        path: libretro-super/dist/unix/*
         if-no-files-found: error
         retention-days: 90
