@@ -1,0 +1,4 @@
+desmume2015 libretro-desmume2015 https://github.com/libretro/desmume2015.git master YES GENERIC Makefile.libretro desmume
+gpsp libretro-gpsp https://github.com/libretro/gpsp.git master YES GENERIC Makefile .
+pcsx_rearmed libretro-pcsx_rearmed https://github.com/libretro/pcsx_rearmed.git master YES GENERIC Makefile.libretro . DYNAREC=ari64 HAVE_NEON=1 BUILTIN_GPU=neon
+yabause libretro-yabause https://github.com/libretro/yabause.git master YES GENERIC Makefile yabause/src/libretro
