@@ -15,7 +15,7 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/root/workspace \
         techdevangelist/miyoomini-buildroot:latest /bin/bash -c \
-        "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && ./libretro-buildbot-recipe.sh ../cores-onionos-special && pwd && cd dist/unix && for i in *.so; do cp ../info/\${i%.*}.info .; done && ls -lah ./"
+        "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && ./libretro-buildbot-recipe.sh ../cores-onionos && ./libretro-buildbot-recipe.sh ../cores-onionos-special && pwd && cd dist/unix && for i in *.so; do cp ../info/\${i%.*}.info .; done && ls -lah ./"
 
     - name: Upload the build artifact
       uses: actions/upload-artifact@v3.0.0
