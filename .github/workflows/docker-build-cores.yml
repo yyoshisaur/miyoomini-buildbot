@@ -1,4 +1,4 @@
-name: Build via Docker image
+name: Build Cores via Docker
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
         techdevangelist/miyoomini-buildroot:latest /bin/bash -c \
         "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && ./libretro-buildbot-recipe.sh ../cores-onionos && ./libretro-buildbot-recipe.sh ../cores-onionos-special && pwd && cd dist/unix && for i in *.so; do cp ../info/\${i%.*}.info .; done && ls -lah ./"
 
-    - name: Upload the build artifact
+    - name: Upload the build artifacts
       uses: actions/upload-artifact@v3.0.0
       with:
         name: OnionOS cores for arm7neonhf
