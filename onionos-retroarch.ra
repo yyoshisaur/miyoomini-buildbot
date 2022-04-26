@@ -1,4 +1,4 @@
-retroarch retroarch https://github.com/TechDevangelist/RetroArch.git PROJECT YES . BRANCH=miyoomini-1.10.2 BUILD=YES
+retroarch retroarch https://github.com/TechDevangelist/RetroArch.git PROJECT YES . BRANCH=miyoomini-1.10.2 BUILD=YES MAKE="make -f Makefile.miyoomini"
 overlays overlays https://github.com/libretro/common-overlays.git ASSETS YES retroarch/media
 assets assets https://github.com/libretro/retroarch-assets.git ASSETS YES retroarch/media
 libretrodb libretrodb https://github.com/libretro/libretro-database.git ASSETS YES retroarch/media
