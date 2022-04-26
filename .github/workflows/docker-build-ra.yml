@@ -24,8 +24,10 @@ jobs:
         path: | 
           libretro-super/retroarch/retroarch
           libretro-super/retroarch/retroarch.cfg
-          libretro-super/retroarch/retroarch/filters/audio/*.dsp
-          libretro-super/retroarch/retroarch/filters/video/*.filt
+          libretro-super/retroarch/libretro-common/audio/dsp_filters/*.dsp
+          libretro-super/retroarch/libretro-common/audio/dsp_filters/*.filt
+          libretro-super/retroarch/media/libretrodb/rdb/*.rdb
+          libretro-super/retroarch/media/assets/rgui/font/*
           libretro-super/retroarch/COPYING
         if-no-files-found: error
         retention-days: 90
