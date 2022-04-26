@@ -1,0 +1,26 @@
+name: Build RA via Docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-ra:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Checkout & build the repo in buildroot
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/root/workspace \
+        techdevangelist/miyoomini-buildroot:latest /bin/bash -c \
+        "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && ./libretro-buildbot-recipe.sh ../onionos-retroarch && pwd && cd dist/unix && ls -lah ./"
+
+    - name: Upload the build artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: OnionOS RetroArch build
+        path: libretro-super/dist/unix/*
+        if-no-files-found: error
+        retention-days: 90
