@@ -1,4 +1,4 @@
-name: Build RA via Docker image
+name: Build RetroArch via Docker
 
 on:
   workflow_dispatch:
@@ -15,12 +15,12 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/root/workspace \
         techdevangelist/miyoomini-buildroot:latest /bin/bash -c \
-        "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && sed -i '/echo \"cloning repo/i BRANCH=\"miyoomini-1.10.2\"' libretro-buildbot-recipe.sh && ./libretro-buildbot-recipe.sh ../onionos-retroarch && pwd && ls -lahR ./retroarch"
+        "cd /root/workspace && git submodule init && git submodule update && cd libretro-super && sed -i '/echo \"cloning repo/i BRANCH=\"miyoomini-1.10.3\"' libretro-buildbot-recipe.sh && ./libretro-buildbot-recipe.sh ../onionos-retroarch && pwd && ls -lahR ./retroarch"
 
-    - name: Upload the build artifact
+    - name: Upload the build artifacts
       uses: actions/upload-artifact@v3.0.0
       with:
-        name: OnionOS RetroArch build
+        name: RetroArch build
         path: | 
           libretro-super/retroarch/retroarch
           libretro-super/retroarch/retroarch.cfg
