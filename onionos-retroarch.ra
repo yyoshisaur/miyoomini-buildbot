@@ -1,2 +1,2 @@
-retroarch retroarch https://github.com/TechDevangelist/RetroArch.git PROJECT YES . BUILD=YES MAKE=--makefile=Makefile.miyoomini
+retroarch retroarch https://github.com/TechDevangelist/RetroArch.git PROJECT YES . BUILD=YES
 assets assets https://github.com/libretro/retroarch-assets.git ASSETS YES retroarch/media
