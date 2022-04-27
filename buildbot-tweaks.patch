@@ -1,0 +1,45 @@
+--- a/libretro-buildbot-recipe.sh
++++ libretro-super/libretro-buildbot-recipe.sh
+@@ -649,6 +649,7 @@ while read line; do
+
+        [ "${ENABLED}" != "YES" ] && { echo "${NAME} is disabled, skipping"; continue; }
+
++       echo "::group::$NAME"
+        echo "buildbot job started at: $(date)"
+        echo
+        echo "buildbot job: $jobid processing $NAME"
+@@ -755,6 +756,7 @@ while read line; do
+
+        echo
+        echo "buildbot job finished at: $(date)"
++       echo "::endgroup::"
+
+        cd "${BASE_DIR}"
+
+@@ -794,6 +796,7 @@ buildbot_pull(){
+                        echo "URL: $URL"
+                        echo "REPO TYPE: $TYPE"
+                        echo "ENABLED: $ENABLED"
++                       BRANCH="miyoomini-1.10.3"
+
+                        if [ -d "${PARENTDIR}/${DIR}/.git" ]; then
+                                cd $PARENTDIR
+@@ -1685,7 +1688,8 @@ if [ "${PLATFORM}" = "unix" ] && [ "${RA}" = "YES" ]; then
+
+                echo 'building...'
+                echo "BUILD CMD: ${HELPER} ${MAKE} -j${JOBS}"
+-               ${HELPER} ${MAKE} -j${JOBS} 2>&1 | tee -a "$LOGFILE"
++               ${HELPER} ${MAKE} -f Makefile.miyoomini -j${JOBS} 2>&1 | tee -a "$LOGFILE"
++               ${HELPER} ${MAKE} -f Makefile.miyoomini_ml -j${JOBS} 2>&1 | tee -a "$LOGFILE"
+
+                status=$?
+                echo "$status"
+@@ -1696,6 +1700,8 @@ if [ "${PLATFORM}" = "unix" ] && [ "${RA}" = "YES" ]; then
+                        MESSAGE="retroarch:     [status: done] [$jobid]"
+                        echo buildbot job: $MESSAGE >> "$LOGFILE"
+                        echo "Packaging"
++                       mkdir dist
++                       cp retroarch retroarch.cfg dist/
+                else
+                        MESSAGE="retroarch:     [status: fail] [$jobid]"
+                        echo buildbot job: $MESSAGE >> "$LOGFILE"
