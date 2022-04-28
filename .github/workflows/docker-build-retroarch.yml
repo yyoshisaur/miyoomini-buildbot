@@ -22,12 +22,7 @@ jobs:
       with:
         name: RetroArch build
         path: | 
-          libretro-super/retroarch/retroarch
-          libretro-super/retroarch/retroarch_multilang
-          libretro-super/retroarch/retroarch.cfg
-          libretro-super/retroarch/libretro-common/audio/dsp_filters/*.dsp
-          libretro-super/retroarch/gfx/video_filters/*.filt
-          libretro-super/retroarch/media/assets/rgui/font/*
+          libretro-super/retroarch/dist/*
           libretro-super/retroarch/COPYING
         if-no-files-found: error
         retention-days: 90

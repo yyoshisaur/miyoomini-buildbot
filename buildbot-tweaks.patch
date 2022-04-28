@@ -1,5 +1,5 @@
---- orig/libretro-buildbot-recipe.sh	2022-04-27 20:24:28.878028740 +0000
-+++ libretro-super/libretro-buildbot-recipe.sh	2022-04-27 20:27:45.458218787 +0000
+--- libretro-super/libretro-buildbot-recipe.sh	2022-04-28 19:32:40.937244108 +0000
++++ libretro-super/libretro-buildbot-recipe.sh	2022-04-28 19:42:05.616596581 +0000
 @@ -649,6 +649,7 @@
  
  	[ "${ENABLED}" != "YES" ] && { echo "${NAME} is disabled, skipping"; continue; }
@@ -24,23 +24,49 @@
  
  			if [ -d "${PARENTDIR}/${DIR}/.git" ]; then
  				cd $PARENTDIR
-@@ -1685,7 +1688,8 @@
+@@ -1666,12 +1669,12 @@
+ 
+ 		touch $TMPDIR/built-frontend
+ 
+-		compile_filters audio ${HELPER} ${MAKE}
+-		compile_filters video ${HELPER} ${MAKE}
++		#compile_filters audio ${HELPER} ${MAKE}
++		#compile_filters video ${HELPER} ${MAKE}
+ 
+-		echo 'configuring...'
+-		echo "configure command: $CONFIGURE $ARGS"
+-		${CONFIGURE} ${ARGS}
++		#echo 'configuring...'
++		#echo "configure command: $CONFIGURE $ARGS"
++		#${CONFIGURE} ${ARGS}
+ 
+ 		echo 'cleaning up...'
+ 		echo "CLEANUP CMD: ${HELPER} ${MAKE} clean"
+@@ -1684,8 +1687,11 @@
+ 		fi
  
  		echo 'building...'
- 		echo "BUILD CMD: ${HELPER} ${MAKE} -j${JOBS}"
+-		echo "BUILD CMD: ${HELPER} ${MAKE} -j${JOBS}"
 -		${HELPER} ${MAKE} -j${JOBS} 2>&1 | tee -a "$LOGFILE"
++		echo "BUILD CMD: ${HELPER} ${MAKE} -f Makefile.miyoomini -j${JOBS}"
 +		${HELPER} ${MAKE} -f Makefile.miyoomini -j${JOBS} 2>&1 | tee -a "$LOGFILE"
++		${HELPER} ${MAKE} clean
++		echo "BUILD CMD: ${HELPER} ${MAKE} -f Makefile.miyoomini_ml -j${JOBS}"
 +		${HELPER} ${MAKE} -f Makefile.miyoomini_ml -j${JOBS} 2>&1 | tee -a "$LOGFILE"
  
  		status=$?
  		echo "$status"
-@@ -1696,6 +1700,9 @@
+@@ -1696,6 +1702,13 @@
  			MESSAGE="retroarch:	[status: done] [$jobid]"
  			echo buildbot job: $MESSAGE >> "$LOGFILE"
  			echo "Packaging"
-+			mkdir dist
-+			cp retroarch retroarch.cfg dist/
-+			ls -lah dist/
++			mkdir -p dist/.retroarch/assets/rgui/font dist/.retroarch/filters/video dist/.retroarch/filters/audio
++			cp retroarch retroarch_multilang COPYING dist/
++			cp retroarch.cfg dist/.retroarch/
++			cp libretro-common/audio/dsp_filters/*.dsp dist/.retroarch/filters/audio/
++			cp gfx/video_filters/*.filt dist/.retroarch/filters/video/
++			cp media/assets/rgui/font/* dist/.retroarch/assets/rgui/font/
++			ls -lahR dist/
  		else
  			MESSAGE="retroarch:	[status: fail] [$jobid]"
  			echo buildbot job: $MESSAGE >> "$LOGFILE"
