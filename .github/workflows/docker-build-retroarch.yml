@@ -23,7 +23,7 @@ jobs:
         name: RetroArch build
         path: | 
           libretro-super/retroarch/retroarch
-          libretro-super/retroarch/retroarch_ml
+          libretro-super/retroarch/retroarch_multilang
           libretro-super/retroarch/retroarch.cfg
           libretro-super/retroarch/libretro-common/audio/dsp_filters/*.dsp
           libretro-super/retroarch/gfx/video_filters/*.filt
