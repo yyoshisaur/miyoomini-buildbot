@@ -1,5 +1,5 @@
 --- libretro-super/libretro-buildbot-recipe.sh	2022-04-28 19:32:40.937244108 +0000
-+++ libretro-super/libretro-buildbot-recipe.sh	2022-04-28 19:42:05.616596581 +0000
++++ libretro-super/libretro-buildbot-recipe.sh	2022-04-28 19:55:38.678933261 +0000
 @@ -649,6 +649,7 @@
  
  	[ "${ENABLED}" != "YES" ] && { echo "${NAME} is disabled, skipping"; continue; }
@@ -42,26 +42,28 @@
  
  		echo 'cleaning up...'
  		echo "CLEANUP CMD: ${HELPER} ${MAKE} clean"
-@@ -1684,8 +1687,11 @@
+@@ -1684,8 +1687,13 @@
  		fi
  
  		echo 'building...'
 -		echo "BUILD CMD: ${HELPER} ${MAKE} -j${JOBS}"
 -		${HELPER} ${MAKE} -j${JOBS} 2>&1 | tee -a "$LOGFILE"
 +		echo "BUILD CMD: ${HELPER} ${MAKE} -f Makefile.miyoomini -j${JOBS}"
++		mkdir dist/
 +		${HELPER} ${MAKE} -f Makefile.miyoomini -j${JOBS} 2>&1 | tee -a "$LOGFILE"
++		cp retroarch dist/
 +		${HELPER} ${MAKE} clean
 +		echo "BUILD CMD: ${HELPER} ${MAKE} -f Makefile.miyoomini_ml -j${JOBS}"
 +		${HELPER} ${MAKE} -f Makefile.miyoomini_ml -j${JOBS} 2>&1 | tee -a "$LOGFILE"
  
  		status=$?
  		echo "$status"
-@@ -1696,6 +1702,13 @@
+@@ -1696,6 +1704,13 @@
  			MESSAGE="retroarch:	[status: done] [$jobid]"
  			echo buildbot job: $MESSAGE >> "$LOGFILE"
  			echo "Packaging"
 +			mkdir -p dist/.retroarch/assets/rgui/font dist/.retroarch/filters/video dist/.retroarch/filters/audio
-+			cp retroarch retroarch_multilang COPYING dist/
++			cp retroarch_multilang COPYING dist/
 +			cp retroarch.cfg dist/.retroarch/
 +			cp libretro-common/audio/dsp_filters/*.dsp dist/.retroarch/filters/audio/
 +			cp gfx/video_filters/*.filt dist/.retroarch/filters/video/

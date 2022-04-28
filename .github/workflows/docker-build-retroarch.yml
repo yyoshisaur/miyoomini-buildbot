@@ -23,6 +23,5 @@ jobs:
         name: RetroArch build
         path: | 
           libretro-super/retroarch/dist/*
-          libretro-super/retroarch/COPYING
         if-no-files-found: error
         retention-days: 90
