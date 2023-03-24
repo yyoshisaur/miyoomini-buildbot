@@ -1,0 +1,2 @@
+gpsp libretro-gpsp https://github.com/yyoshisaur/gpsp.git master YES GENERIC Makefile .
+mgba libretro-mgba https://github.com/yyoshisaur/mgba.git master YES GENERIC Makefile.libretro .
