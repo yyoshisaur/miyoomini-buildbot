@@ -1,2 +1,3 @@
 mednafen_psx libretro-beetle_psx https://github.com/libretro/beetle-psx-libretro.git master YES GENERIC Makefile . HAVE_LIGHTREC=1
 mednafen_psx_hw libretro-beetle_psx_hw https://github.com/libretro/beetle-psx-libretro.git master YES GENERIC Makefile . HAVE_LIGHTREC=1 HAVE_HW=1
+pcsx_rearmed libretro-pcsx_rearmed https://github.com/libretro/pcsx_rearmed.git master YES GENERIC Makefile.libretro . DYNAREC=ari64 HAVE_NEON=1 BUILTIN_GPU=neon
